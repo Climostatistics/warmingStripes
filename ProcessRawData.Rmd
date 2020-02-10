@@ -94,6 +94,9 @@ return(baset)
 
 ```{r calc-baseperiods}
 basePeriod=basestats()
+for (byear in seq(1930,1990,10)){
+  bp=basestats(byear)
+}
 
 ```
 
