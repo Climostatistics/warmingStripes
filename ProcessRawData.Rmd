@@ -77,18 +77,22 @@ seriesMax=(max(annualGlobal$anomaly))
 seriesSpread=(max(annualGlobal$anomaly)-min(annualGlobal$anomaly))
 ```
 
-```{r baseyears}
-syear=1960
-eyear=1990
-base=annualGlobal %>%
+```{r baseyears-fcn}
+basestats<-function(syear=1960,eyear=1990){
+baset=annualGlobal %>%
   filter(year>=syear) %>%
   filter(year<=eyear)
-baseline=(sum(base$anomaly))
-basespread=(max(base$anomaly)-min(base$anomaly))
+baseline=(sum(baset$anomaly))
+basespread=(max(baset$anomaly)-min(baset$anomaly))
 
-stats=glue("The total series spread id {seriesSpread} and the baseline anomaly for the years {syear} through {eyear} inclusive is {baseline} with a spread of {basespread}")
+stats=glue("Function output: The total series spread id {seriesSpread} and the baseline anomaly for the years {syear} through {eyear} inclusive is {baseline} with a spread of {basespread}")
 print(stats)
+return(baset)
+}
+```
 
+```{r calc-baseperiods}
+basePeriod=basestats()
 ```
 
 
