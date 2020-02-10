@@ -1,0 +1,73 @@
+---
+title: "Met Office Historic Station Data"
+author: "Kate Belisle"
+date: "2/10/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r process-urls}
+historical=c("https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/aberporthdata.txt","Aberporth",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/armaghdata.txt","Armagh",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/ballypatrickdata.txt","Ballypatrick Forest",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/bradforddata.txt","Bradford",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/braemardata.txt","Braemar",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/cambornedata.txt","Camborne",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/cambridgedata.txt","Cambridge NIAB",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/cardiffdata.txt","Cardiff Bute Park",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/chivenordata.txt","Chivenor",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/cwmystwythdata.txt","Cwmystwyth",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/dunstaffnagedata.txt","Dunstaffnage",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/durhamdata.txt","Durham",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/eastbournedata.txt","Eastbourne",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/eskdalemuirdata.txt","Eskdalemuir",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/heathrowdata.txt","Heathrow",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/hurndata.txt","Hurn",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/lerwickdata.txt","Lerwick",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/leucharsdata.txt","Leuchars",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/lowestoftdata.txt","Lowestoft",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/manstondata.txt","Manston",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/nairndata.txt","Nairn",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/newtonriggdata.txt","Newton Rigg",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/oxforddata.txt","Oxford",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/paisleydata.txt","Paisley",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/ringwaydata.txt","Ringway",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/rossonwyedata.txt","Ross-on-Wye",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/shawburydata.txt","Shawbury",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/sheffielddata.txt","Sheffield",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/southamptondata.txt","Southampton",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/stornowaydata.txt","Stornoway Airport",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/suttonboningtondata.txt","Sutton Bonington",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/tireedata.txt","Tiree",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/valleydata.txt","Valley",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/waddingtondata.txt","Waddington",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/whitbydata.txt","Whitby",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/wickairportdata.txt","Wick Airport",
+            "https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/yeoviltondata.txt","Yeovilton")
+n=length(historical)
+hstations=tibble(url=historical[seq(1,n,2)],
+station=historical[seq(2,n,2)])
+```
+
+##Now process a sample data set.
+
+Yeovilton  
+Location: 355100E 123200N, Lat 51.006 Lon -2.641, 20 metres amsl  
+Estimated data is marked with a * after the value.  
+Missing data (more than 2 days missing in month) is marked by  ---.  
+Sunshine data taken from an automatic Kipp & Zonen sensor marked with a #, otherwise sunshine data taken from a Campbell Stokes recorder.  
+   yyyy  mm   tmax    tmin      af    rain     sun  
+              degC    degC    days      mm   hours  
+   1964   9   20.5     8.8       0    37.4     ---
+   1964  10   13.6     4.2       5    77.8     ---
+*snip*              
+
+First row is name, quality check
+Process Location
+Not sure if tmax is mean(max) ?? I guess it is
+af is air frost days
+need to calculate days in month
+

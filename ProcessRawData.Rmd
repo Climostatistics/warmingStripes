@@ -11,6 +11,8 @@ knitr::opts_chunk$set(echo = FALSE)
 require(tidyverse)
 require(dplyr)
 require(glue)
+
+
 ```
 
 #Pull data outlined in 
@@ -72,14 +74,15 @@ annualGlobal=read_delim(url(annualGlobalUrl),delim=" ",
   mutate(lerr=anomaly-l95all,
          uerr=u95all-anomaly,
          spread=(u95all-l95all)/2 )
-saveRDS(annualGlobal,"ukglobal.rds")
+saveRDS(annualGlobal,"ukglobalraw.rds")
 seriesMin=(min(annualGlobal$anomaly))
 seriesMax=(max(annualGlobal$anomaly))
 seriesSpread=(max(annualGlobal$anomaly)-min(annualGlobal$anomaly))
+
 ```
 
 ```{r baseyears-fcn}
-basestats<-function(syear=1960,intervalLength=30){
+basestats<-function(syear=1961,intervalLength=29){
 eyear=syear+intervalLength
 baset=annualGlobal %>%
   filter(year>=syear) %>%
@@ -95,10 +98,21 @@ return(baset)
 
 ```{r calc-baseperiods}
 basePeriod=basestats()
-for (byear in seq(1930,1990,10)){
+for (byear in seq(1931,1991,9)){
   bp=basestats(byear)
 }
 
 ```
 
+# in which we first calibrate everything so base period is zero...
+```{r adjust-anomolies-to-actual}
+adjustment=sum(basePeriod$anomaly)
+print(adjustment)
+annualAdjustment=round((adjustment/(nrow(basePeriod))),4)
+print(annualAdjustment)
+#annualGlobal$rptAnomaly=annualGlobal$anomaly
+#annualGlobal$anomaly=(annualGlobal$rptAnomaly-annualAdjustment)
+#nbasePeriod=basestats()
+
+```
 
