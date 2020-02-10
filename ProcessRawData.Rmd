@@ -9,6 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = FALSE)
 require(tidyverse)
 require(dplyr)
+require(glue)
 ```
 
 #Pull data outlined in 
@@ -74,6 +75,9 @@ saveRDS(annualGlobal,"ukglobal.rds")
 seriesMin=(min(annualGlobal$anomaly))
 seriesMax=(max(annualGlobal$anomaly))
 seriesSpread=(max(annualGlobal$anomaly)-min(annualGlobal$anomaly))
+```
+
+```{r baseyears}
 syear=1960
 eyear=1990
 base=annualGlobal %>%
@@ -81,7 +85,10 @@ base=annualGlobal %>%
   filter(year<=eyear)
 baseline=(sum(base$anomaly))
 basespread=(max(base$anomaly)-min(base$anomaly))
+
+stats=glue("The total series spread id {seriesSpread} and the baseline anomaly for the years {syear} through {eyear} inclusive is {baseline} with a spread of {basespread}")
+print(stats)
+
 ```
 
-The total series spread id `r seriesSpread` and the baseline anomaly for the years `r syear` through `r eyear` inclusive is `r baseline` with a spread of `r basespread`
 
