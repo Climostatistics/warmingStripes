@@ -78,7 +78,8 @@ seriesSpread=(max(annualGlobal$anomaly)-min(annualGlobal$anomaly))
 ```
 
 ```{r baseyears-fcn}
-basestats<-function(syear=1960,eyear=1990){
+basestats<-function(syear=1960,intervalLength=30){
+eyear=syear+intervalLength
 baset=annualGlobal %>%
   filter(year>=syear) %>%
   filter(year<=eyear)
@@ -93,6 +94,7 @@ return(baset)
 
 ```{r calc-baseperiods}
 basePeriod=basestats()
+
 ```
 
 
