@@ -2,7 +2,8 @@
 title: "Process Raw Data"
 author: "Kate Belisle"
 date: "2/10/2020"
-output: html_document
+output: 
+  tufte::tufte_html: default
 ---
 
 ```{r setup, include=FALSE}
