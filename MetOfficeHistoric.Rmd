@@ -50,6 +50,10 @@ historical=c("https://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationda
 n=length(historical)
 hstations=tibble(url=historical[seq(1,n,2)],
 station=historical[seq(2,n,2)])
+hstations$fname=basename(hstations$url)
+for(i in seq(1,n/2)){
+#    with(hstations,download.file(url[i], fname[i]))
+}
 ```
 
 ##Now process a sample data set.
@@ -70,4 +74,23 @@ Process Location
 Not sure if tmax is mean(max) ?? I guess it is
 af is air frost days
 need to calculate days in month
+
+```{r read-data-fcn}
+readMetLoc<-function(station,fname){
+  print(station)
+  indat<-read_lines(fname,n_max=1,skip = 2)
+  return(indat)
+}
+
+```
+
+```{r process-stations}
+locations<-c()
+for(i in seq(1,n/2)){
+  loc<- with(hstations,readMetLoc(names[i], paste0('metdata/',fname[i])  ) )
+  
+  locations<-c(locations,loc)
+}
+
+```
 
