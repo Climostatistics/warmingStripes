@@ -1,0 +1,35 @@
+
+Location: 224100E 252100N, Lat 52.139 Lon -4.570, 133 metres amsl
+
+Location: 287800E 345800N (Irish Grid), Lat 54.352 Lon -6.649, 62 metres amsl
+
+Location: 315200E 791400N, 339 metres amsl (1959 to Apr 2005), 
+
+Location: 543500E 260600N, Lat 52.245 Lon 0.102, 26 metres amsl
+
+Location: 277300E 274900N, Lat 52.358 Lon -3.802, 301 metres amsl
+
+Location: 426700E 541500N, Lat 54.768 Lon -1.585, 102 metres amsl
+
+Location: 561100E 98300N, Lat 50.762 Lon 0.285, 7 metres amsl
+
+Location: 445300E 1139700N, Lat 60.139 Lon -1.183, 82 metres amsl
+
+Location: 346800E 720900N, Lat 56.377 Lon -2.861, 10 metres amsl
+
+Location: 450900E 207200N, Lat 51.761 Lon -1.262, 63 metres amsl
+Location: 381400E 384400N, Lat 53.356 Lon -2.279, 69 metres amsl
+
+Location: 359800E 223800N, Lat 51.911 Lon -2.584, 67 metres amsl
+
+Location: 355200E 322100N, Lat 52.794 Lon -2.663, 72 metres amsl
+
+Location: 146400E 933200N, Lat 58.214 Lon -6.318, 15 metres amsl
+
+Location: 450700E 325900N, Lat 52.833 Lon -1.250, 48 metres amsl
+
+Location: 99800E 744800N, Lat 56.500 Lon -6.880, 12 metres amsl
+
+Location: 230800E 375800N, Lat 53.252 Lon -4.535, 10 metres amsl
+
+Location: 355100E 123200N, Lat 51.006 Lon -2.641, 20 metres amsl
