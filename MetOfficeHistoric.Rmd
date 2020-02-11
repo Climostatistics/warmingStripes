@@ -90,15 +90,16 @@ readMet<-function(station,fname){
 
 ```{r process-stations}
 locations<-c()
-metdata<-list()
+metdata<-NULL
 for(i in seq(1,n/2)){
   
   raw<- (with(hstations,readMet(names[i],paste0('metdata/',fname[i])  )))
   loc<-raw[raw %like% "Location:"]
   locations<-c(locations,loc)
   fdata<-which(raw %like% "degC")
-  rmetdata<-read_delim(raw[fdata+1:length(raw)],delim=" ",col_names = c("year","month","tmax","tmin","af","rain","sun"),na="    ---")
-  print(rmetdata)
+  rmetdata<-read_delim(raw[fdata+1:length(raw)],delim=" ",col_names = c("year","month","tmax","tmin","af","rain","sun"),trim_ws=TRUE,na="---")
+  rmetdata$station=hstations$station[i]
+  metdata<-bind_rows(metdata,rmetdata)
   # loc<- str_split(with(hstations,readMetLoc(names[i], paste0('metdata/',fname[i])  ) ),",")[[1]]
   # lat=as.numeric(str_split(loc[2]," ")[[1]][3])    
   # lon=as.numeric(str_split(loc[2]," ")[[1]][5]) 
